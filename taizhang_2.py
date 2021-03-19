@@ -1,6 +1,6 @@
 import pandas as pd
-import numpy as np
-from pandas.core.frame import  DataFrame
+
+
 import math
 
 def taizhang():
@@ -66,8 +66,9 @@ def taizhang():
 
                 money = df1.iloc[j, 4]
             except IndexError as e:
-                break
                 print(e)
+                break
+
 
             money_temp = money_temp + money
 
@@ -89,7 +90,7 @@ def taizhang():
                         df_1 = df1.loc[:j]
                         df_2 = df1.loc[j + 1:]
                     else:
-                        F_start = df1.iloc[F_count + 1, 3]
+                        F_start = df1.iloc[F_count+1, 3]
                         F_end = F_start  # 匹配成功，标记结束位置
                         print(F_start)
                         print(F_end)
@@ -109,10 +110,18 @@ def taizhang():
                         df_2 = df1.loc[j + 1:]
 
                     else:
-                        F_start = df1.iloc[F_count, 3]  # 开始时间
+                        F_start = df1.iloc[F_count-1, 3]  # 开始时间
+
+
+
                         F_end = df1.iloc[j, 3]  # 匹配成功，标记结束位置
                         df_1 = df1.loc[:j]
                         df_2 = df1.loc[j + 1:]
+                # if math.isnan(F_start) is True:
+                #     F_count += 1
+                #     F_start = df1.iloc[F_count, 3]
+                if F_start is None:
+                    F_start = df1.iloc[F_count, 3]
 
                 print('df1 is:\n', df_1)
                 print('df2 is:\n', df_2)
@@ -185,7 +194,5 @@ def taizhang():
                     print(e)
         count += 1
         df1.to_excel('D:\\财务数据\\结果居民\\' + str(count) + '.xlsx', index=None)
-
-
 
 
